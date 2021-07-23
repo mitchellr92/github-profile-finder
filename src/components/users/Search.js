@@ -9,11 +9,20 @@ export class Search extends Component {
   static propTypes = {
     searchUsers: PropTypes.func.isRequired,
     clearUsers: PropTypes.func.isRequired,
-    showClear: PropTypes.bool.isRequired
+    showClear: PropTypes.bool.isRequired,
+    setAlert: PropTypes.func.isRequired,
   };
 
   onSubmit = e => {
     e.preventDefault();
+    if (this.state.text === "") {
+      this.props.setAlert("Please enter something", "light");
+    } else {
+      this.props.searchUsers(this.state.text);
+      this.setState({
+        text: ""
+      });
+    }
     this.props.searchUsers(this.state.text);
     this.setState({
       text: ""
@@ -44,10 +53,7 @@ export class Search extends Component {
           />
         </form>
         {showClear && (
-          <button
-            className="btn btn-light btn-block"
-            onClick={clearUsers}
-          >
+          <button className="btn btn-light btn-block" onClick={clearUsers}>
             Clear
           </button>
         )}
