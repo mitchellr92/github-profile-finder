@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React, { Fragment, Component } from "react";
 
 class User extends Component {
   componentDidMount() {
     this.props.getUser(this.props.match.params.login);
   }
-
   render() {
     const {
       name,
@@ -23,7 +22,7 @@ class User extends Component {
 
     const { loading } = this.props;
 
-    return <div>{name}</div>;
+    return <Fragment>{name}</Fragment>;
   }
 }
 
